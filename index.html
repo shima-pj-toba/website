@@ -148,11 +148,11 @@
                 class="flex items-center gap-2.5 sm:gap-3 focus:outline-none transition-opacity hover:opacity-80">
                 <!-- ロゴ画像（透過対応） -->
                 <div class="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center overflow-hidden flex-shrink-0">
-                    <img src="logo.png" alt="サイトロゴ" class="w-full h-full object-contain"
+                    <img src="./logo.png" alt="サイトロゴ" class="w-full h-full object-contain"
                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <!-- フォールバック用オリジナルSVGロゴ -->
                     <svg class="hidden w-6 h-6 text-mizuiro" viewBox="0 0 36 36" fill="none"
-                        xmlns="logo.png">
+                        xmlns="./logo.png">
                         <path d="M5 23C10 15 15 15 19 20C22 17 26 17 31 23" stroke="currentColor" stroke-width="2.6"
                             stroke-linecap="square" stroke-linejoin="miter" />
                         <path d="M4 27.5C8 25.5 12 29.5 16 27.5C20 25.5 24 29.5 28 27.5C30 26.5 31 27 32 27.5"
@@ -273,7 +273,7 @@
                     <!-- 右側：縦長マップ画像 -->
                     <div class="md:col-span-5 flex justify-center">
                         <img 
-                            src="map.png" 
+                            src="./map.png" 
                             alt="島々のマップ" 
                             class="w-full max-w-sm md:max-w-none h-auto object-contain"
                             onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22 viewBox=%220 0 400 600%22%3E%3Crect width=%22400%22 height=%22600%22 fill=%22%23e2e8f0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%2364748b%22%3Emap.png%3C/text%3E%3C/svg%3E';"
