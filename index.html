@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>横浜国立大学 地域課題実習 | 島プロジェクトin鳥羽</title>
+
+	<!-- Tailwind CSS の読み込み -->
+	<script src="https://cdn.tailwindcss.com"></script>
+
+	<!-- Google Fonts: 筑紫丸ゴシックに近い柔らかで温かみのある「Zen Maru Gothic」を読み込み -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+		rel="stylesheet">
+
+	<!-- Tailwind カスタム設定 -->
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						// 肌色の背景色とバリエーション
+						skin: {
+							DEFAULT: '#F7EDE2',
+							light: '#FCF8F3',
+							dark: '#EAD8C3',
+						},
+						// アクセントの水色
+						mizuiro: {
+							DEFAULT: '#4FB3E8',
+							light: '#7CC7F0',
+							dark: '#3598CE',
+						},
+						// 優しい墨色テキスト
+						ink: '#3E3A36',
+					},
+					fontFamily: {
+						maru: ['"Zen Maru Gothic"', 'sans-serif'],
+					}
+				}
+			}
+		}
+	</script>
+
+	<style>
+		/* ベースフォントと背景色の設定 */
+		body {
+			background-color: #F7EDE2;
+			color: #3E3A36;
+			font-family: 'Zen Maru Gothic', sans-serif;
+			overflow-x: hidden;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		/* 縦書き設定 */
+		.vertical-text {
+			writing-mode: vertical-rl;
+			-webkit-writing-mode: vertical-rl;
+			text-orientation: upright;
+			letter-spacing: 0.22em;
+		}
+
+		/* ナビゲーションタブの下線アニメーション（水色） */
+		.nav-tab {
+			position: relative;
+			padding-bottom: 6px;
+			transition: color 0.3s ease;
+		}
+
+		.nav-tab::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 3px;
+			background-color: #4FB3E8;
+			/* 水色の下線 */
+			transform: scaleX(0);
+			transform-origin: center;
+			transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		.nav-tab.active {
+			color: #2B8AC0;
+			font-weight: 700;
+		}
+
+		.nav-tab.active::after {
+			transform: scaleX(1);
+		}
+
+		.nav-tab:hover::after {
+			transform: scaleX(0.6);
+		}
+
+		.nav-tab.active:hover::after {
+			transform: scaleX(1);
+		}
+
+		/* 下からフェードインするアニメーション用クラス */
+		.reveal-up {
+			opacity: 0;
+			transform: translateY(32px);
+			transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+				transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		.reveal-up.is-visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		/* ページ切り替え時のフェードアニメーション */
+		.tab-panel {
+			display: none;
+			animation: panelFadeIn 0.5s ease forwards;
+		}
+
+		.tab-panel.active {
+			display: block;
+		}
+
+		@keyframes panelFadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(10px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	</style>
+</head>
+
+<body class="min-h-screen flex flex-col selection:bg-mizuiro selection:text-white">
+
+<!-- ==================== ヘッダー・ナビゲーション ==================== -->
+    <header class="sticky top-0 z-50 bg-skin/95 backdrop-blur-md transition-all">
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+
+            <!-- ロゴエリア ＋「島プロジェクトin鳥羽」（左上に配置・クリックでTOPページへ移動） -->
+            <button id="logo-btn" type="button" aria-label="TOPページへ戻る"
+                class="flex items-center gap-2.5 sm:gap-3 focus:outline-none transition-opacity hover:opacity-80">
+                <!-- ロゴ画像（透過対応） -->
+                <div class="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center overflow-hidden flex-shrink-0">
+                    <img src="logo.png" alt="サイトロゴ" class="w-full h-full object-contain"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <!-- フォールバック用オリジナルSVGロゴ -->
+                    <svg class="hidden w-6 h-6 text-mizuiro" viewBox="0 0 36 36" fill="none"
+                        xmlns="logo.png">
+                        <path d="M5 23C10 15 15 15 19 20C22 17 26 17 31 23" stroke="currentColor" stroke-width="2.6"
+                            stroke-linecap="square" stroke-linejoin="miter" />
+                        <path d="M4 27.5C8 25.5 12 29.5 16 27.5C20 25.5 24 29.5 28 27.5C30 26.5 31 27 32 27.5"
+                            stroke="currentColor" stroke-width="2.4" stroke-linecap="square" />
+                        <circle cx="25.5" cy="10.5" r="3" fill="currentColor" />
+                    </svg>
+                </div>
+                <!-- ロゴの横のテキスト（スマホでは小さく、PCではしっかり表示） -->
+                <span class="text-xs sm:text-sm md:text-base font-bold text-ink tracking-wide whitespace-nowrap">
+                    地域課題実習 島プロジェクトin鳥羽
+                </span>
+            </button>
+
+            <!-- ナビゲーションタブ（真ん中上に配置：TOP / WORKS / NEWS / Q&A / CONTACT） -->
+            <nav aria-label="メインナビゲーション" class="overflow-x-auto no-scrollbar absolute left-1/2 -translate-x-1/2 hidden md:block">
+                <ul
+                    class="flex items-center justify-center space-x-6 lg:space-x-9 text-sm md:text-base font-medium tracking-wider whitespace-nowrap py-1">
+                    <li>
+                        <button type="button" data-target="top" class="nav-tab active cursor-pointer">
+                            TOP
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" data-target="works" class="nav-tab cursor-pointer">
+                            WORKS
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" data-target="news" class="nav-tab cursor-pointer">
+                            NEWS
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" data-target="qa" class="nav-tab cursor-pointer">
+                            Q&amp;A
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" data-target="contact" class="nav-tab cursor-pointer">
+                            CONTACT
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+	<!-- ==================== メインコンテンツ ==================== -->
+	<main class="flex-grow">
+
+		<!-- ==================== 1. TOP ページ ==================== -->
+		<section id="panel-top" class="tab-panel active">
+			<div class="max-w-5xl mx-auto px-4 sm:px-8 pt-6 pb-20 md:pt-12 md:pb-28">
+
+				<!-- ヒーローセクション：3:2画像の上に縦書きキャッチコピーを重ねて配置 -->
+				<div class="relative w-full">
+
+					<!-- ステップ1：下からフェードインする 3:2 の image.png（角丸・縁取りなし） -->
+					<div id="hero-image-box" class="reveal-up w-full">
+						<div class="aspect-[3/2] w-full overflow-hidden bg-skin-dark/50 relative">
+							<img id="hero-img" src="image.png" alt="島の穏やかな風景" class="w-full h-full object-cover"
+								onerror="handleHeroImageFallback(this)">
+						</div>
+					</div>
+
+					<!-- ステップ2 & 3：画像の上に重なって順番に下からフェードインする縦書きコピー -->
+					<!-- 水色の四角（角丸・縁取りなし）の上に白色の文字 -->
+					<div
+						class="absolute top-4 right-4 sm:top-8 sm:right-8 md:top-12 md:right-12 z-10 flex flex-row-reverse items-start gap-2.5 sm:gap-4">
+
+						<!-- 1番目に表示：「島民と島外の人の」 -->
+						<div id="catchphrase-1" class="reveal-up bg-mizuiro text-white px-2 py-4 sm:px-0 sm:py-0">
+							<p
+								class="vertical-text text-lg sm:text-2xl md:text-3xl lg:text-[34px] font-bold leading-none select-none">
+								島民と島外の人の
+							</p>
+						</div>
+
+						<!-- 2番目に表示：「中間となる存在に」 -->
+						<div id="catchphrase-2"
+							class="reveal-up mt-6 sm:mt-10 md:mt-14 bg-mizuiro text-white px-2 py-4 sm:px-0 sm:py-0">
+							<p
+								class="vertical-text text-lg sm:text-2xl md:text-3xl lg:text-[34px] font-bold leading-none select-none">
+								中間となる存在に
+							</p>
+						</div>
+
+					</div>
+				</div>
+
+<!-- TOPページ下部：島プロとは？セクション（左：説明文を大きく / 右：縦長マップ） -->
+                <div id="hero-intro" class="reveal-up mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center text-left text-mizuiro">
+                    
+                    <!-- 左側：説明文（全体的に文字を大きく） -->
+                    <div class="md:col-span-7">
+                        <h2 class="inline-block text-2xl sm:text-3xl font-bold pb-2 mb-6 border-b-2 border-mizuiro">
+                            島プロとは？
+                        </h2>
+                        <div class="space-y-6 text-base sm:text-lg md:text-xl font-medium leading-relaxed">
+                            <p>
+                                島プロジェクトin鳥羽は2022年に活動を開始した<br class="hidden sm:inline">
+                                横浜国立大学の地域課題実習です。
+                            </p>
+                            <p>
+                                私たちは年に4回、答志島、菅島、神島などの<br class="hidden sm:inline">
+                                三重県鳥羽市にある離島を訪れて、<br class="hidden sm:inline">
+                                島の課題解決に貢献できるような活動に<br class="hidden sm:inline">
+                                取り組んでいます。
+                            </p>
+                            <p>
+                                島を訪れて地域の人との信頼関係を築いていくなかで、<br class="hidden sm:inline">
+                                島の方々が求めていることと私たちがやりたいことの<br class="hidden sm:inline">
+                                重なる部分を探っていくことを大切にしています。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 右側：縦長マップ画像 -->
+                    <div class="md:col-span-5 flex justify-center">
+                        <img 
+                            src="map.png" 
+                            alt="島々のマップ" 
+                            class="w-full max-w-sm md:max-w-none h-auto object-contain"
+                            onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22 viewBox=%220 0 400 600%22%3E%3Crect width=%22400%22 height=%22600%22 fill=%22%23e2e8f0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%2364748b%22%3Emap.png%3C/text%3E%3C/svg%3E';"
+                        >
+                    </div>
+
+                </div>
+
+			</div>
+		</section>
+
+		<!-- ==================== 2. WORKS ページ ==================== -->
+		<section id="panel-works" class="tab-panel">
+			<div class="max-w-5xl mx-auto px-4 sm:px-8 py-12 md:py-16">
+				<div class="text-center mb-12">
+					<h2
+						class="text-2xl sm:text-3xl font-bold tracking-wider text-ink inline-block border-b-4 border-mizuiro pb-2">
+						WORKS
+					</h2>
+					<p class="mt-3 text-sm sm:text-base text-ink/75">島民と島外の人をつなぐこれまでの取り組み</p>
+				</div>
+
+				<!-- ==================== 2026年度 ==================== -->
+				<div class="mb-20">
+					<h3 class="text-xl sm:text-2xl font-bold text-ink border-b-2 border-mizuiro pb-2 mb-8">
+						2026年度
+					</h3>
+
+					<!-- 島での活動（カード4つ） -->
+					<div class="mb-12">
+						<h4 class="text-base sm:text-lg font-bold text-mizuiro-dark mb-5 flex items-center gap-2">
+							<span class="w-2.5 h-2.5 bg-mizuiro inline-block"></span>
+							島での活動
+						</h4>
+						<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+							<!-- 実績カード 1 -->
+							<article class="bg-skin-light overflow-hidden flex flex-col">
+								<div class="aspect-[3/2] bg-mizuiro/20 flex items-center justify-center p-4">
+
+								</div>
+								<div class="p-5 flex-grow flex flex-col justify-between">
+									<div>
+										<h5 class="font-bold text-base text-ink mb-2">GW渡島</h5>
+										<p class="text-xs sm:text-sm text-ink/75 leading-relaxed">
+											2026年度に島で行った活動の内容や目的、島民の方々との関わりについての説明文が入ります。
+										</p>
+									</div>
+									<span class="mt-4 inline-block text-xs text-mizuiro-dark font-bold">2026年5月実施</span>
+								</div>
+							</article>
+
+							<!-- 実績カード 2 -->
+							<article class="bg-skin-light overflow-hidden flex flex-col">
+								<div class="aspect-[3/2] bg-mizuiro/20 flex items-center justify-center p-4">
+
+								</div>
+								<div class="p-5 flex-grow flex flex-col justify-between">
+									<div>
+										<h5 class="font-bold text-base text-ink mb-2">お盆合宿</h5>
+										<p class="text-xs sm:text-sm text-ink/75 leading-relaxed">
+											2026年度に島で行った活動の内容や目的、島民の方々との関わりについての説明文が入ります。
+										</p>
+									</div>
+									<span class="mt-4 inline-block text-xs text-mizuiro-dark font-bold">2026年8月実施</span>
+								</div>
+							</article>
+
+							<!-- 実績カード 3 -->
+							<article class="bg-skin-light overflow-hidden flex flex-col">
+								<div class="aspect-[3/2] bg-mizuiro/20 flex items-center justify-center p-4">
+
+								</div>
+								<div class="p-5 flex-grow flex flex-col justify-between">
+									<div>
+										<h5 class="font-bold text-base text-ink mb-2">夏渡島</h5>
+										<p class="text-xs sm:text-sm text-ink/75 leading-relaxed">
+											2026年度に島で行った活動の内容や目的、島民の方々との関わりについての説明文が入ります。
+										</p>
+									</div>
+									<span class="mt-4 inline-block text-xs text-mizuiro-dark font-bold">2026年9月実施</span>
+								</div>
+							</article>
+
+							<!-- 実績カード 4 -->
+							<article class="bg-skin-light overflow-hidden flex flex-col">
+								<div class="aspect-[3/2] bg-mizuiro/20 flex items-center justify-center p-4">
+
+								</div>
+								<div class="p-5 flex-grow flex flex-col justify-between">
+									<div>
+										<h5 class="font-bold text-base text-ink mb-2">はんにち結</h5>
+										<p class="text-xs sm:text-sm text-ink/75 leading-relaxed">
+											2026年度に島で行った活動の内容や目的、島民の方々との関わりについての説明文が入ります。
+										</p>
+									</div>
+									<span class="mt-4 inline-block text-xs text-mizuiro-dark font-bold">2027年3月予定</span>
+								</div>
+							</article>
+						</div>
+					</div>
+
+					<!-- 大学での活動（カード2つ） -->
+					<div>
+						<h4 class="text-base sm:text-lg font-bold text-mizuiro-dark mb-5 flex items-center gap-2">
+							<span class="w-2.5 h-2.5 bg-mizuiro inline-block"></span>
+							大学での活動
+						</h4>
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+							<!-- 実績カード 1 -->
+							<article class="bg-skin-light overflow-hidden flex flex-col">
+								<div class="aspect-[3/2] bg-mizuiro/20 flex items-center justify-center p-6">
+
+								</div>
+								<div class="p-6 flex-grow flex flex-col justify-between">
+									<div>
+										<h5 class="font-bold text-lg text-ink mb-2">お茶会</h5>
+										<p class="text-sm text-ink/75 leading-relaxed">
+											2026年度に横浜国立大学のキャンパス内や地域イベントで行った企画・発信活動の内容が入ります。
+										</p>
+									</div>
+									<span class="mt-4 inline-block text-xs text-mizuiro-dark font-bold">通期(月2~4回)</span>
+								</div>
+							</article>
+
+							<!-- 実績カード 2 -->
+							<article class="bg-skin-light overflow-hidden flex flex-col">
+								<div class="aspect-[3/2] bg-mizuiro/20 flex items-center justify-center p-6">
+
+								</div>
+								<div class="p-6 flex-grow flex flex-col justify-between">
+									<div>
+										<h5 class="font-bold text-lg text-ink mb-2">常盤祭出店</h5>
+										<p class="text-sm text-ink/75 leading-relaxed">
+											2026年度に大学内で行った活動報告会やワークショップなどの取り組みについての説明文が入ります。
+										</p>
+									</div>
+									<span
+										class="mt-4 inline-block text-xs text-mizuiro-dark font-bold">2026年11月実施</span>
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
+
+				<!-- ==================== 2025年度の活動 ==================== -->
+				<div>
+					<h3 class="text-xl sm:text-2xl font-bold text-ink border-b-2 border-mizuiro pb-2 mb-8">
+						過去の活動
+					</h3>
+					<div class="mb-12">
+						<h4 class="text-base sm:text-lg font-bold text-mizuiro-dark mb-5 flex items-center gap-2">
+							<span class="w-2.5 h-2.5 bg-mizuiro inline-block"></span>
+							2025年度の活動
+						</h4>
+						<p class="text-sm sm:text-base font-medium">
+							2025年度は◯◯を目的に活動を行い、◯◯ができました。
+						</p><br class="hidden sm:inline">
+						<h4 class="text-base sm:text-lg font-bold text-mizuiro-dark mb-5 flex items-center gap-2">
+							<span class="w-2.5 h-2.5 bg-mizuiro inline-block"></span>
+							2024年度の活動
+						</h4>
+						<h4 class="text-base sm:text-lg font-bold text-mizuiro-dark mb-5 flex items-center gap-2">
+							<span class="w-2.5 h-2.5 bg-mizuiro inline-block"></span>
+							2023年度の活動
+						</h4>
+						<h4 class="text-base sm:text-lg font-bold text-mizuiro-dark mb-5 flex items-center gap-2">
+							<span class="w-2.5 h-2.5 bg-mizuiro inline-block"></span>
+							2022年度の活動
+						</h4>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ==================== 3. NEWS ページ ==================== -->
+		<section id="panel-news" class="tab-panel">
+			<div class="max-w-4xl mx-auto px-4 sm:px-8 py-12 md:py-16">
+				<div class="text-center mb-12">
+					<h2
+						class="text-2xl sm:text-3xl font-bold tracking-wider text-ink inline-block border-b-4 border-mizuiro pb-2">
+						NEWS
+					</h2>
+					<p class="mt-3 text-sm sm:text-base text-ink/75">お知らせ・最新の活動記録</p>
+				</div>
+
+				<div class="bg-skin-light p-6 sm:p-10 space-y-6">
+					<!-- ニュース項目 1 -->
+					<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+						<div class="flex items-center gap-3 shrink-0">
+							<time class="text-sm text-ink/60 font-medium">2026.11.05</time>
+							<span class="px-3 py-0.5 bg-mizuiro text-white text-xs font-bold">お知らせ</span>
+						</div>
+						<p
+							class="text-sm sm:text-base font-medium text-ink hover:text-mizuiro-dark transition-colors cursor-pointer">
+							例: 冬の「島とつながる小さな相談会」を東京・オンライン同時開催いたします。
+						</p>
+					</div>
+
+					<!-- ニュース項目 2 -->
+					<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+						<div class="flex items-center gap-3 shrink-0">
+							<time class="text-sm text-ink/60 font-medium">2026.10.18</time>
+							<span class="px-3 py-0.5 bg-mizuiro/20 text-mizuiro-dark text-xs font-bold">活動報告</span>
+						</div>
+						<p
+							class="text-sm sm:text-base font-medium text-ink hover:text-mizuiro-dark transition-colors cursor-pointer">
+							例: 秋の収穫お手伝いプログラムに島外から12名の方にご参加いただきました。
+						</p>
+					</div>
+
+					<!-- ニュース項目 3 -->
+					<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+						<div class="flex items-center gap-3 shrink-0">
+							<time class="text-sm text-ink/60 font-medium">2026.09.24</time>
+							<span class="px-3 py-0.5 bg-mizuiro text-white text-xs font-bold">メディア</span>
+						</div>
+						<p
+							class="text-sm sm:text-base font-medium text-ink hover:text-mizuiro-dark transition-colors cursor-pointer">
+							例: 地域づくり情報誌にて「島民と移住希望者の橋渡し役」として紹介されました。
+						</p>
+					</div>
+
+					<!-- ニュース項目 4 -->
+					<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+						<div class="flex items-center gap-3 shrink-0">
+							<time class="text-sm text-ink/60 font-medium">2026.08.30</time>
+							<span class="px-3 py-0.5 bg-mizuiro/20 text-mizuiro-dark text-xs font-bold">活動報告</span>
+						</div>
+						<p
+							class="text-sm sm:text-base font-medium text-ink hover:text-mizuiro-dark transition-colors cursor-pointer">
+							例: 公式Webサイトをリニューアルオープンいたしました。
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ==================== 4. Q&A ページ ==================== -->
+		<section id="panel-qa" class="tab-panel">
+			<div class="max-w-4xl mx-auto px-4 sm:px-8 py-12 md:py-16">
+				<div class="text-center mb-12">
+					<h2
+						class="text-2xl sm:text-3xl font-bold tracking-wider text-ink inline-block border-b-4 border-mizuiro pb-2">
+						Q&amp;A
+					</h2>
+					<p class="mt-3 text-sm sm:text-base text-ink/75">よくあるご質問</p>
+				</div>
+
+				<div class="space-y-4">
+					<!-- Q&A 1 -->
+					<div class="bg-skin-light overflow-hidden">
+						<button type="button"
+							class="qa-toggle w-full px-6 py-5 text-left flex items-center justify-between gap-4 font-bold text-ink hover:bg-white/40 transition-colors">
+							<span class="flex items-center gap-3">
+								<span
+									class="w-8 h-8 bg-mizuiro text-white flex items-center justify-center shrink-0 text-sm">Q</span>
+								<span>渡島に行けなくても参加できますか？</span>
+							</span>
+							<span
+								class="qa-icon text-mizuiro-dark text-xl font-bold transition-transform duration-300">＋</span>
+						</button>
+						<div class="qa-content hidden px-6 pb-6 pt-2 text-sm sm:text-base text-ink/80 leading-relaxed">
+							<div class="flex items-start gap-3">
+								<span
+									class="w-8 h-8 bg-skin-dark text-ink flex items-center justify-center shrink-0 text-sm font-bold mt-0.5">A</span>
+								<p>はい、もちろんです。学内での日々の活動を評価してもらうことで単位取得可能です。ですが、やはり渡島してこそ活動に価値が生まれるものなので、ぜひ渡島も検討してください。
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Q&A 2 -->
+					<div class="bg-skin-light overflow-hidden">
+						<button type="button"
+							class="qa-toggle w-full px-6 py-5 text-left flex items-center justify-between gap-4 font-bold text-ink hover:bg-white/40 transition-colors">
+							<span class="flex items-center gap-3">
+								<span
+									class="w-8 h-8 bg-mizuiro text-white flex items-center justify-center shrink-0 text-sm">Q</span>
+								<span>渡島に関わる費用は誰が負担しますか？</span>
+							</span>
+							<span
+								class="qa-icon text-mizuiro-dark text-xl font-bold transition-transform duration-300">＋</span>
+						</button>
+						<div class="qa-content hidden px-6 pb-6 pt-2 text-sm sm:text-base text-ink/80 leading-relaxed">
+							<div class="flex items-start gap-3">
+								<span
+									class="w-8 h-8 bg-skin-dark text-ink flex items-center justify-center shrink-0 text-sm font-bold mt-0.5">A</span>
+								<p>基本的に交通費のみが完全に自費となります。</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Q&A 3 -->
+					<div class="bg-skin-light overflow-hidden">
+						<button type="button"
+							class="qa-toggle w-full px-6 py-5 text-left flex items-center justify-between gap-4 font-bold text-ink hover:bg-white/40 transition-colors">
+							<span class="flex items-center gap-3">
+								<span
+									class="w-8 h-8 bg-mizuiro text-white flex items-center justify-center shrink-0 text-sm">Q</span>
+								<span>都市科学部でなくても参加できますか？またどの学科が多いですか？</span>
+							</span>
+							<span
+								class="qa-icon text-mizuiro-dark text-xl font-bold transition-transform duration-300">＋</span>
+						</button>
+						<div class="qa-content hidden px-6 pb-6 pt-2 text-sm sm:text-base text-ink/80 leading-relaxed">
+							<div class="flex items-start gap-3">
+								<span
+									class="w-8 h-8 bg-skin-dark text-ink flex items-center justify-center shrink-0 text-sm font-bold mt-0.5">A</span>
+								<p>どの学部の方も大歓迎です。都市科学部は建築学科と都市社会共生学科が多く、それ以外は経営学科と経済学科、教育学科などの方がいます。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ==================== 5. CONTACT ページ ==================== -->
+		<section id="panel-contact" class="tab-panel">
+			<div class="max-w-3xl mx-auto px-4 sm:px-8 py-12 md:py-16">
+				<div class="text-center mb-12">
+					<h2
+						class="text-2xl sm:text-3xl font-bold tracking-wider text-ink inline-block border-b-4 border-mizuiro pb-2">
+						CONTACT
+					</h2>
+					<p class="mt-3 text-sm sm:text-base text-ink/75">お問い合わせ・ご相談</p>
+				</div>
+
+				<form id="contact-form" class="bg-skin-light p-6 sm:p-10 space-y-6">
+					<div>
+						<label for="name" class="block text-sm font-bold text-ink mb-2">
+							お名前 <span class="ml-1 px-2 py-0.5 bg-mizuiro text-white text-[11px]">必須</span>
+						</label>
+						<input type="text" id="name" required placeholder="例：横国 太郎"
+							class="w-full px-4 py-3 bg-white focus:outline-none">
+					</div>
+
+					<div>
+						<label for="email" class="block text-sm font-bold text-ink mb-2">
+							メールアドレス <span class="ml-1 px-2 py-0.5 bg-mizuiro text-white text-[11px]">必須</span>
+						</label>
+						<input type="email" id="email" required placeholder="例：example@ynu.jp"
+							class="w-full px-4 py-3 bg-white focus:outline-none">
+					</div>
+
+					<div>
+						<label for="category" class="block text-sm font-bold text-ink mb-2">
+							ご用件
+						</label>
+						<select id="category" class="w-full px-4 py-3 bg-white focus:outline-none">
+							<option value="enter">参加・履修について</option>
+							<option value="project">地域連携・取材について</option>
+							<option value="other">その他のお問い合わせ</option>
+						</select>
+					</div>
+
+					<div>
+						<label for="message" class="block text-sm font-bold text-ink mb-2">
+							お問い合わせ内容 <span class="ml-1 px-2 py-0.5 bg-mizuiro text-white text-[11px]">必須</span>
+						</label>
+						<textarea id="message" rows="5" required placeholder="ご質問やご相談内容をお気軽にご記入ください。"
+							class="w-full px-4 py-3 bg-white focus:outline-none"></textarea>
+					</div>
+
+					<div class="pt-2 text-center">
+						<button type="submit"
+							class="w-full sm:w-auto px-12 py-3.5 bg-mizuiro hover:bg-mizuiro-dark text-white font-bold tracking-wider transition-colors cursor-pointer">
+							送信する
+						</button>
+					</div>
+
+					<!-- 送信完了メッセージ（alert()の代わり） -->
+					<div id="contact-feedback"
+						class="hidden p-4 bg-mizuiro/15 text-center text-sm sm:text-base text-mizuiro-dark font-bold">
+						お問い合わせを受け付けました。内容を確認のうえ、担当者よりご連絡いたします。
+					</div>
+				</form>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- ==================== フッター ==================== -->
+	<footer class="bg-skin-light/60 py-8 mt-auto">
+		<div
+			class="max-w-6xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-ink/70">
+			<p class="font-bold text-ink">島プロジェクトin鳥羽 web作成係</p>
+			<p>&copy; 2026 All Rights Reserved.</p>
+		</div>
+	</footer>
+
+	<!-- ==================== JavaScript（アニメーション・タブ制御） ==================== -->
+	<script>
+		/**
+		 * ローカル環境で image.png が未配置の場合でも 3:2 のプレビューが美しく表示されるよう、
+		 * 穏やかな島と海を描いた 3:2 SVGデータURIをフォールバックとして生成する関数
+		 */
+		function handleHeroImageFallback(imgElement) {
+			// 無限ループ防止
+			imgElement.onerror = null;
+
+			const svgContent = `
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600">
+		  <defs>
+			<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+			  <stop offset="0%" stop-color="#BDE4F7"/>
+			  <stop offset="65%" stop-color="#E6F5FC"/>
+			  <stop offset="100%" stop-color="#FBF3E8"/>
+			</linearGradient>
+			<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+			  <stop offset="0%" stop-color="#69C0EC"/>
+			  <stop offset="100%" stop-color="#3C9ED4"/>
+			</linearGradient>
+			<linearGradient id="island1" x1="0" y1="0" x2="0" y2="1">
+			  <stop offset="0%" stop-color="#87B87D"/>
+			  <stop offset="100%" stop-color="#5E9162"/>
+			</linearGradient>
+			<linearGradient id="island2" x1="0" y1="0" x2="0" y2="1">
+			  <stop offset="0%" stop-color="#A6CFA0"/>
+			  <stop offset="100%" stop-color="#79AC7B"/>
+			</linearGradient>
+		  </defs>
+		  <!-- 空 -->
+		  <rect width="900" height="410" fill="url(#sky)"/>
+		  <!-- 太陽 -->
+		  <circle cx="690" cy="145" r="46" fill="#FFF8E7" opacity="0.85"/>
+		  <!-- 遠くの島影 -->
+		  <path d="M460 395 Q560 305 680 340 Q780 315 880 395 Z" fill="url(#island2)" opacity="0.85"/>
+		  <!-- 手前の島影 -->
+		  <path d="M40 395 Q175 265 320 335 Q430 295 540 395 Z" fill="url(#island1)"/>
+		  <!-- 海 -->
+		  <rect y="395" width="900" height="205" fill="url(#sea)"/>
+		  <!-- 穏やかな波のライン -->
+		  <path d="M90 445 Q160 438 230 445 T370 445" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.5"/>
+		  <path d="M510 475 Q590 468 670 475 T830 475" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.55"/>
+		  <path d="M210 520 Q300 512 390 520 T570 520" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.45"/>
+		  <!-- 小さな渡し船 -->
+		  <path d="M425 415 L465 415 L457 424 L433 424 Z" fill="#FFFDF9"/>
+		  <line x1="445" y1="402" x2="445" y2="415" stroke="#FFFDF9" stroke-width="2"/>
+		  <polygon points="445,402 458,411 445,411" fill="#F7EDE2"/>
+		</svg>
+	  `;
+			imgElement.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svgContent);
+		}
+
+		/**
+		 * TOPページの連続フェードインアニメーションを実行する関数
+		 * 1. 3:2画像が下からフェードイン
+		 * 2. 「島民と島外の人の」が下からフェードイン
+		 * 3. 「中間となる存在に」が下からフェードイン
+		 */
+		let animationTimers = [];
+
+		function playTopSequence() {
+			// 既存のタイマーをクリア
+			animationTimers.forEach(timer => clearTimeout(timer));
+			animationTimers = [];
+
+			const heroImage = document.getElementById('hero-image-box');
+			const catch1 = document.getElementById('catchphrase-1');
+			const catch2 = document.getElementById('catchphrase-2');
+			const intro = document.getElementById('hero-intro');
+
+			// 一旦非表示状態にリセット
+			[heroImage, catch1, catch2, intro].forEach(el => {
+				if (el) el.classList.remove('is-visible');
+			});
+
+			// 描画フレームを待ってから順番にフェードインを開始
+			requestAnimationFrame(() => {
+				// 1. まず 3:2 の画像が下からフェードイン
+				animationTimers.push(setTimeout(() => {
+					if (heroImage) heroImage.classList.add('is-visible');
+				}, 120));
+
+				// 2. 画像の表示後、1つ目の縦書き文字「島民と島外の人の」が下からフェードイン
+				animationTimers.push(setTimeout(() => {
+					if (catch1) catch1.classList.add('is-visible');
+				}, 850));
+
+				// 3. 続いて、2つ目の縦書き文字「中間となる存在に」が下からフェードイン
+				animationTimers.push(setTimeout(() => {
+					if (catch2) catch2.classList.add('is-visible');
+				}, 1450));
+
+				// 4. 下部の紹介文もやさしく表示
+				animationTimers.push(setTimeout(() => {
+					if (intro) intro.classList.add('is-visible');
+				}, 1850));
+			});
+		}
+
+		/**
+		 * タブ切り替え処理
+		 */
+		function switchTab(targetName) {
+			const tabs = document.querySelectorAll('.nav-tab');
+			const panels = document.querySelectorAll('.tab-panel');
+
+			// タブの下線（activeクラス）を更新
+			tabs.forEach(tab => {
+				if (tab.dataset.target === targetName) {
+					tab.classList.add('active');
+				} else {
+					tab.classList.remove('active');
+				}
+			});
+
+			// 表示するセクションを切り替え
+			panels.forEach(panel => {
+				if (panel.id === `panel-${targetName}`) {
+					panel.classList.add('active');
+				} else {
+					panel.classList.remove('active');
+				}
+			});
+
+			// ページ上部へスムーズにスクロール
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+
+			// TOPタブに戻ったときはアニメーションを再生
+			if (targetName === 'top') {
+				playTopSequence();
+			}
+		}
+
+		// ページ読み込み完了時の初期化
+		window.addEventListener('DOMContentLoaded', () => {
+			// ナビゲーションタブのクリックイベント
+			document.querySelectorAll('.nav-tab').forEach(tab => {
+				tab.addEventListener('click', () => {
+					switchTab(tab.dataset.target);
+				});
+			});
+
+			// ロゴクリックでTOPページへ移動
+			const logoBtn = document.getElementById('logo-btn');
+			if (logoBtn) {
+				logoBtn.addEventListener('click', () => {
+					switchTab('top');
+				});
+			}
+
+			// Q&A アコーディオンの開閉処理
+			document.querySelectorAll('.qa-toggle').forEach(btn => {
+				btn.addEventListener('click', () => {
+					const content = btn.nextElementSibling;
+					const icon = btn.querySelector('.qa-icon');
+					const isHidden = content.classList.contains('hidden');
+
+					if (isHidden) {
+						content.classList.remove('hidden');
+						icon.textContent = '－';
+					} else {
+						content.classList.add('hidden');
+						icon.textContent = '＋';
+					}
+				});
+			});
+
+			// CONTACTフォーム送信処理（alertを使わず画面内にメッセージを表示）
+			const contactForm = document.getElementById('contact-form');
+			const contactFeedback = document.getElementById('contact-feedback');
+			if (contactForm) {
+				contactForm.addEventListener('submit', (e) => {
+					e.preventDefault();
+					contactFeedback.classList.remove('hidden');
+					contactForm.reset();
+				});
+			}
+
+			// 初回ロード時のTOPページアニメーション開始
+			playTopSequence();
+		});
+	</script>
+</body>
+
+</html>
