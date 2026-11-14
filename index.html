@@ -2,22 +2,22 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>横浜国立大学 地域課題実習 | 島プロジェクトin鳥羽</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>横浜国立大学 地域課題実習 | 島プロジェクトin鳥羽</title>
 
-    <!-- サイト説明文（検索結果のスニペット用） -->
-    <meta name="description" content="横浜国立大学 地域課題実習「島プロジェクトin鳥羽」の公式サイトです。活動紹介や活動実績を発信しています。">
+	<!-- サイト説明文（検索結果のスニペット用） -->
+	<meta name="description" content="横浜国立大学 地域課題実習「島プロジェクトin鳥羽」の公式サイトです。活動紹介や活動実績を発信しています。">
 
-    <!-- OGPタグ（SNSシェア対策 ＆ サイト名認識の補助） -->
-    <meta property="og:site_name" content="GitHub・shima-pj-toba">
-    <meta property="og:title" content="横浜国立大学 地域課題実習 | 島プロジェクトin鳥羽">
-    <meta property="og:description" content="横浜国立大学 地域課題実習「島プロジェクトin鳥羽」の公式サイトです。">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://shima-pj-toba.github.io/website/">
+	<!-- OGPタグ（SNSシェア対策 ＆ サイト名認識の補助） -->
+	<meta property="og:site_name" content="GitHub・shima-pj-toba">
+	<meta property="og:title" content="横浜国立大学 地域課題実習 | 島プロジェクトin鳥羽">
+	<meta property="og:description" content="横浜国立大学 地域課題実習「島プロジェクトin鳥羽」の公式サイトです。">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://shima-pj-toba.github.io/website/">
 
-    <!-- Google検索の「サイト名」を「島プロジェクトin鳥羽」に指定する構造化データ -->
-    <script type="application/ld+json">
+	<!-- Google検索の「サイト名」を「島プロジェクトin鳥羽」に指定する構造化データ -->
+	<script type="application/ld+json">
     {
       "@context" : "https://schema.org",
       "@type" : "WebSite",
@@ -27,46 +27,46 @@
     }
     </script>
 
-    <!-- ファビコン（ブラウザのタブや検索結果の横に出るアイコン：logo.pngを使う場合） -->
-    <link rel="icon" href="logo.png" type="image/png">
+	<!-- ファビコン（ブラウザのタブや検索結果の横に出るアイコン：logo.pngを使う場合） -->
+	<link rel="icon" href="logo.png" type="image/png">
 
-    <!-- Tailwind CSS の読み込み -->
-    <script src="https://cdn.tailwindcss.com"></script>
+	<!-- Tailwind CSS の読み込み -->
+	<script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts: 筑紫丸ゴシックに近い柔らかで温かみのある「Zen Maru Gothic」を読み込み -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
-        rel="stylesheet">
+	<!-- Google Fonts: 筑紫丸ゴシックに近い柔らかで温かみのある「Zen Maru Gothic」を読み込み -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+		rel="stylesheet">
 
-    <!-- Tailwind カスタム設定 -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        // 肌色の背景色とバリエーション
-                        skin: {
-                            DEFAULT: '#F7EDE2',
-                            light: '#FCF8F3',
-                            dark: '#EAD8C3',
-                        },
-                        // アクセントの水色
-                        mizuiro: {
-                            DEFAULT: '#4FB3E8',
-                            light: '#7CC7F0',
-                            dark: '#3598CE',
-                        },
-                        // 優しい墨色テキスト
-                        ink: '#3E3A36',
-                    },
-                    fontFamily: {
-                        maru: ['"Zen Maru Gothic"', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+	<!-- Tailwind カスタム設定 -->
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						// 肌色の背景色とバリエーション
+						skin: {
+							DEFAULT: '#F7EDE2',
+							light: '#FCF8F3',
+							dark: '#EAD8C3',
+						},
+						// アクセントの水色
+						mizuiro: {
+							DEFAULT: '#4FB3E8',
+							light: '#7CC7F0',
+							dark: '#3598CE',
+						},
+						// 優しい墨色テキスト
+						ink: '#3E3A36',
+					},
+					fontFamily: {
+						maru: ['"Zen Maru Gothic"', 'sans-serif'],
+					}
+				}
+			}
+		}
+	</script>
 
 	<style>
 		/* ベースフォントと背景色の設定 */
@@ -163,66 +163,66 @@
 
 <body class="min-h-screen flex flex-col selection:bg-mizuiro selection:text-white">
 
-<!-- ==================== ヘッダー・ナビゲーション ==================== -->
-    <header class="sticky top-0 z-50 bg-skin/95 backdrop-blur-md transition-all">
-        <div class="relative max-w-6xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+	<!-- ==================== ヘッダー・ナビゲーション ==================== -->
+	<header class="sticky top-0 z-50 bg-skin/95 backdrop-blur-md transition-all">
+		<div class="relative max-w-6xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
 
-            <!-- ロゴエリア ＋「島プロジェクトin鳥羽」（左上に配置・クリックでTOPページへ移動） -->
-            <button id="logo-btn" type="button" aria-label="TOPページへ戻る"
-                class="flex items-center gap-2.5 sm:gap-3 focus:outline-none transition-opacity hover:opacity-80">
-                <!-- ロゴ画像（透過対応） -->
-                <div class="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center overflow-hidden flex-shrink-0">
-                    <img src="logo.PNG" alt="サイトロゴ" class="w-full h-full object-contain"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <!-- フォールバック用オリジナルSVGロゴ -->
-                    <svg class="hidden w-6 h-6 text-mizuiro" viewBox="0 0 36 36" fill="none"
-                        xmlns="logo.PNG">
-                        <path d="M5 23C10 15 15 15 19 20C22 17 26 17 31 23" stroke="currentColor" stroke-width="2.6"
-                            stroke-linecap="square" stroke-linejoin="miter" />
-                        <path d="M4 27.5C8 25.5 12 29.5 16 27.5C20 25.5 24 29.5 28 27.5C30 26.5 31 27 32 27.5"
-                            stroke="currentColor" stroke-width="2.4" stroke-linecap="square" />
-                        <circle cx="25.5" cy="10.5" r="3" fill="currentColor" />
-                    </svg>
-                </div>
-                <!-- ロゴの横のテキスト（スマホでは小さく、PCではしっかり表示） -->
-                <span class="text-xs sm:text-sm md:text-base font-bold text-ink tracking-wide whitespace-nowrap">
-                    地域課題実習 島プロジェクトin鳥羽
-                </span>
-            </button>
+			<!-- ロゴエリア ＋「島プロジェクトin鳥羽」（左上に配置・クリックでTOPページへ移動） -->
+			<button id="logo-btn" type="button" aria-label="TOPページへ戻る"
+				class="flex items-center gap-2.5 sm:gap-3 focus:outline-none transition-opacity hover:opacity-80">
+				<!-- ロゴ画像（透過対応） -->
+				<div class="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center overflow-hidden flex-shrink-0">
+					<img src="logo.PNG" alt="サイトロゴ" class="w-full h-full object-contain"
+						onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+					<!-- フォールバック用オリジナルSVGロゴ -->
+					<svg class="hidden w-6 h-6 text-mizuiro" viewBox="0 0 36 36" fill="none" xmlns="logo.PNG">
+						<path d="M5 23C10 15 15 15 19 20C22 17 26 17 31 23" stroke="currentColor" stroke-width="2.6"
+							stroke-linecap="square" stroke-linejoin="miter" />
+						<path d="M4 27.5C8 25.5 12 29.5 16 27.5C20 25.5 24 29.5 28 27.5C30 26.5 31 27 32 27.5"
+							stroke="currentColor" stroke-width="2.4" stroke-linecap="square" />
+						<circle cx="25.5" cy="10.5" r="3" fill="currentColor" />
+					</svg>
+				</div>
+				<!-- ロゴの横のテキスト（スマホでは小さく、PCではしっかり表示） -->
+				<span class="text-xs sm:text-sm md:text-base font-bold text-ink tracking-wide whitespace-nowrap">
+					地域課題実習 島プロジェクトin鳥羽
+				</span>
+			</button>
 
-            <!-- ナビゲーションタブ（真ん中上に配置：TOP / WORKS / NEWS / Q&A / CONTACT） -->
-            <nav aria-label="メインナビゲーション" class="overflow-x-auto no-scrollbar absolute left-1/2 -translate-x-1/2 hidden md:block">
-                <ul
-                    class="flex items-center justify-center space-x-6 lg:space-x-9 text-sm md:text-base font-medium tracking-wider whitespace-nowrap py-1">
-                    <li>
-                        <button type="button" data-target="top" class="nav-tab active cursor-pointer">
-                            TOP
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" data-target="works" class="nav-tab cursor-pointer">
-                            WORKS
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" data-target="news" class="nav-tab cursor-pointer">
-                            NEWS
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" data-target="qa" class="nav-tab cursor-pointer">
-                            Q&amp;A
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" data-target="contact" class="nav-tab cursor-pointer">
-                            CONTACT
-                        </button>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+			<!-- ナビゲーションタブ（真ん中上に配置：TOP / WORKS / NEWS / Q&A / CONTACT） -->
+			<nav aria-label="メインナビゲーション"
+				class="overflow-x-auto no-scrollbar absolute left-1/2 -translate-x-1/2 hidden md:block">
+				<ul
+					class="flex items-center justify-center space-x-6 lg:space-x-9 text-sm md:text-base font-medium tracking-wider whitespace-nowrap py-1">
+					<li>
+						<button type="button" data-target="top" class="nav-tab active cursor-pointer">
+							TOP
+						</button>
+					</li>
+					<li>
+						<button type="button" data-target="works" class="nav-tab cursor-pointer">
+							WORKS
+						</button>
+					</li>
+					<li>
+						<button type="button" data-target="news" class="nav-tab cursor-pointer">
+							NEWS
+						</button>
+					</li>
+					<li>
+						<button type="button" data-target="qa" class="nav-tab cursor-pointer">
+							Q&amp;A
+						</button>
+					</li>
+					<li>
+						<button type="button" data-target="contact" class="nav-tab cursor-pointer">
+							CONTACT
+						</button>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
 
 	<!-- ==================== メインコンテンツ ==================== -->
 	<main class="flex-grow">
@@ -267,44 +267,41 @@
 					</div>
 				</div>
 
-<!-- TOPページ下部：島プロとは？セクション（左：説明文を大きく / 右：縦長マップ） -->
-                <div id="hero-intro" class="reveal-up mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center text-left text-mizuiro">
-                    
-                    <!-- 左側：説明文（全体的に文字を大きく） -->
-                    <div class="md:col-span-7">
-                        <h2 class="inline-block text-2xl sm:text-3xl font-bold pb-2 mb-6 border-b-2 border-mizuiro">
-                            島プロとは？
-                        </h2>
-                        <div class="space-y-6 text-base sm:text-lg md:text-xl font-medium leading-relaxed">
-                            <p>
-                                島プロジェクトin鳥羽は2022年に活動を開始した<br class="hidden sm:inline">
-                                横浜国立大学の地域課題実習です。
-                            </p>
-                            <p>
-                                私たちは年に4回、答志島、菅島、神島などの<br class="hidden sm:inline">
-                                三重県鳥羽市にある離島を訪れて、<br class="hidden sm:inline">
-                                島の課題解決に貢献できるような活動に<br class="hidden sm:inline">
-                                取り組んでいます。
-                            </p>
-                            <p>
-                                島を訪れて地域の人との信頼関係を築いていくなかで、<br class="hidden sm:inline">
-                                島の方々が求めていることと私たちがやりたいことの<br class="hidden sm:inline">
-                                重なる部分を探っていくことを大切にしています。
-                            </p>
-                        </div>
-                    </div>
+				<!-- TOPページ下部：島プロとは？セクション（左：説明文を大きく / 右：縦長マップ） -->
+				<div id="hero-intro"
+					class="reveal-up mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center text-left text-mizuiro">
 
-                    <!-- 右側：縦長マップ画像 -->
-                    <div class="md:col-span-5 flex justify-center">
-                        <img 
-                            src="map.PNG" 
-                            alt="島々のマップ" 
-                            class="w-full max-w-sm md:max-w-none h-auto object-contain"
-                            onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22 viewBox=%220 0 400 600%22%3E%3Crect width=%22400%22 height=%22600%22 fill=%22%23e2e8f0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%2364748b%22%3Emap.png%3C/text%3E%3C/svg%3E';"
-                        >
-                    </div>
+					<!-- 左側：説明文（全体的に文字を大きく） -->
+					<div class="md:col-span-7">
+						<h2 class="inline-block text-2xl sm:text-3xl font-bold pb-2 mb-6 border-b-2 border-mizuiro">
+							島プロとは？
+						</h2>
+						<div class="space-y-6 text-base sm:text-lg md:text-xl font-medium leading-relaxed">
+							<p>
+								島プロジェクトin鳥羽は2022年に活動を開始した<br class="hidden sm:inline">
+								横浜国立大学の地域課題実習です。
+							</p>
+							<p>
+								私たちは年に4回、答志島、菅島、神島などの<br class="hidden sm:inline">
+								三重県鳥羽市にある離島を訪れて、<br class="hidden sm:inline">
+								島の課題解決に貢献できるような活動に<br class="hidden sm:inline">
+								取り組んでいます。
+							</p>
+							<p>
+								島を訪れて地域の人との信頼関係を築いていくなかで、<br class="hidden sm:inline">
+								島の方々が求めていることと私たちがやりたいことの<br class="hidden sm:inline">
+								重なる部分を探っていくことを大切にしています。
+							</p>
+						</div>
+					</div>
 
-                </div>
+					<!-- 右側：縦長マップ画像 -->
+					<div class="md:col-span-5 flex justify-center">
+						<img src="map.PNG" alt="島々のマップ" class="w-full max-w-sm md:max-w-none h-auto object-contain"
+							onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22 viewBox=%220 0 400 600%22%3E%3Crect width=%22400%22 height=%22600%22 fill=%22%23e2e8f0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%2364748b%22%3Emap.png%3C/text%3E%3C/svg%3E';">
+					</div>
+
+				</div>
 
 			</div>
 		</section>
@@ -625,12 +622,15 @@
 					<p class="mt-3 text-sm sm:text-base text-ink/75">お問い合わせ・ご相談</p>
 				</div>
 
-				<form id="contact-form" class="bg-skin-light p-6 sm:p-10 space-y-6">
+				<!-- actionにFormspreeから発行されたURLを設定してください -->
+				<form id="contact-form" action="https://formspree.io/f/xjywgpbj" method="POST"
+					class="bg-skin-light p-6 sm:p-10 space-y-6">
 					<div>
 						<label for="name" class="block text-sm font-bold text-ink mb-2">
 							お名前 <span class="ml-1 px-2 py-0.5 bg-mizuiro text-white text-[11px]">必須</span>
 						</label>
-						<input type="text" id="name" required placeholder="例：横国 太郎"
+						<!-- name属性を追加 -->
+						<input type="text" id="name" name="name" required placeholder="例：横国 太郎"
 							class="w-full px-4 py-3 bg-white focus:outline-none">
 					</div>
 
@@ -638,7 +638,8 @@
 						<label for="email" class="block text-sm font-bold text-ink mb-2">
 							メールアドレス <span class="ml-1 px-2 py-0.5 bg-mizuiro text-white text-[11px]">必須</span>
 						</label>
-						<input type="email" id="email" required placeholder="例：example@ynu.jp"
+						<!-- name属性を追加 -->
+						<input type="email" id="email" name="email" required placeholder="例：example@ynu.jp"
 							class="w-full px-4 py-3 bg-white focus:outline-none">
 					</div>
 
@@ -646,7 +647,8 @@
 						<label for="category" class="block text-sm font-bold text-ink mb-2">
 							ご用件
 						</label>
-						<select id="category" class="w-full px-4 py-3 bg-white focus:outline-none">
+						<!-- name属性を追加 -->
+						<select id="category" name="category" class="w-full px-4 py-3 bg-white focus:outline-none">
 							<option value="enter">参加・履修について</option>
 							<option value="project">地域連携・取材について</option>
 							<option value="other">その他のお問い合わせ</option>
@@ -657,18 +659,19 @@
 						<label for="message" class="block text-sm font-bold text-ink mb-2">
 							お問い合わせ内容 <span class="ml-1 px-2 py-0.5 bg-mizuiro text-white text-[11px]">必須</span>
 						</label>
-						<textarea id="message" rows="5" required placeholder="ご質問やご相談内容をお気軽にご記入ください。"
+						<!-- name属性を追加 -->
+						<textarea id="message" name="message" rows="5" required placeholder="ご質問やご相談内容をお気軽にご記入ください。"
 							class="w-full px-4 py-3 bg-white focus:outline-none"></textarea>
 					</div>
 
 					<div class="pt-2 text-center">
-						<button type="submit"
+						<button type="submit" id="submit-btn"
 							class="w-full sm:w-auto px-12 py-3.5 bg-mizuiro hover:bg-mizuiro-dark text-white font-bold tracking-wider transition-colors cursor-pointer">
 							送信する
 						</button>
 					</div>
 
-					<!-- 送信完了メッセージ（alert()の代わり） -->
+					<!-- 送信完了メッセージ -->
 					<div id="contact-feedback"
 						class="hidden p-4 bg-mizuiro/15 text-center text-sm sm:text-base text-mizuiro-dark font-bold">
 						お問い合わせを受け付けました。内容を確認のうえ、担当者よりご連絡いたします。
@@ -857,14 +860,42 @@
 				});
 			});
 
-			// CONTACTフォーム送信処理（alertを使わず画面内にメッセージを表示）
+			// CONTACTフォーム送信処理（Formspree連携版）
 			const contactForm = document.getElementById('contact-form');
 			const contactFeedback = document.getElementById('contact-feedback');
+			const submitBtn = document.getElementById('submit-btn');
+
 			if (contactForm) {
-				contactForm.addEventListener('submit', (e) => {
+				contactForm.addEventListener('submit', async (e) => {
 					e.preventDefault();
-					contactFeedback.classList.remove('hidden');
-					contactForm.reset();
+
+					// 送信中の二重クリック防止やローテーション表示（任意）
+					submitBtn.disabled = true;
+					submitBtn.textContent = '送信中...';
+
+					const formData = new FormData(contactForm);
+
+					try {
+						const response = await fetch(contactForm.action, {
+							method: contactForm.method,
+							body: formData,
+							headers: {
+								'Accept': 'application/json'
+							}
+						});
+
+						if (response.ok) {
+							contactFeedback.classList.remove('hidden');
+							contactForm.reset();
+						} else {
+							alert('送信に失敗しました。入力内容をご確認のうえ、再度お試しください。');
+						}
+					} catch (error) {
+						alert('ネットワークエラーが発生しました。接続環境をご確認ください。');
+					} finally {
+						submitBtn.disabled = false;
+						submitBtn.textContent = '送信する';
+					}
 				});
 			}
 
