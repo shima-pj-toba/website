@@ -622,8 +622,15 @@
 					<p class="mt-3 text-sm sm:text-base text-ink/75">お問い合わせ・ご相談</p>
 				</div>
 
-				<!-- actionにFormspreeから発行されたURLを設定してください -->
-				<form id="contact-form" action="https://formspree.io/f/xjywgpbj" method="POST"
+				<p class="max-w-3xl mx-auto mb-6 text-center text-sm sm:text-base text-ink/75">
+					フォームがうまく送信できない場合は、下記のメールアドレス宛にご連絡ください。<br>
+					<a href="mailto:shimapj.in.toba@gmail.com"
+						class="font-bold text-mizuiro-dark underline underline-offset-4">
+						shimapj.in.toba@gmail.com
+					</a>
+				</p>
+
+				<form id="contact-form" action="mailto:shimapj.in.toba@gmail.com" method="POST"
 					class="bg-skin-light p-6 sm:p-10 space-y-6">
 					<div>
 						<label for="name" class="block text-sm font-bold text-ink mb-2">
@@ -653,6 +660,9 @@
 							<option value="project">地域連携・取材について</option>
 							<option value="other">その他のお問い合わせ</option>
 						</select>
+						<p class="mt-2 text-xs text-ink/70">
+							件名は選択した項目になります。
+						</p>
 					</div>
 
 					<div>
@@ -667,14 +677,13 @@
 					<div class="pt-2 text-center">
 						<button type="submit" id="submit-btn"
 							class="w-full sm:w-auto px-12 py-3.5 bg-mizuiro hover:bg-mizuiro-dark text-white font-bold tracking-wider transition-colors cursor-pointer">
-							送信する
+							メールソフトで送る
 						</button>
 					</div>
 
-					<!-- 送信完了メッセージ -->
 					<div id="contact-feedback"
 						class="hidden p-4 bg-mizuiro/15 text-center text-sm sm:text-base text-mizuiro-dark font-bold">
-						お問い合わせを受け付けました。内容を確認のうえ、担当者よりご連絡いたします。
+						メールソフトが開きます。内容を確認して送信してください。
 					</div>
 				</form>
 			</div>
@@ -860,42 +869,29 @@
 				});
 			});
 
-			// CONTACTフォーム送信処理（Formspree連携版）
+			// メールソフトでお問い合わせメールを作成
 			const contactForm = document.getElementById('contact-form');
 			const contactFeedback = document.getElementById('contact-feedback');
-			const submitBtn = document.getElementById('submit-btn');
 
 			if (contactForm) {
-				contactForm.addEventListener('submit', async (e) => {
+				contactForm.addEventListener('submit', (e) => {
 					e.preventDefault();
 
-					// 送信中の二重クリック防止やローテーション表示（任意）
-					submitBtn.disabled = true;
-					submitBtn.textContent = '送信中...';
-
 					const formData = new FormData(contactForm);
+					const categorySelect = document.getElementById('category');
+					const subject = categorySelect.options[categorySelect.selectedIndex].text;
+					const body = [
+						`お名前: ${formData.get('name')}`,
+						`メールアドレス: ${formData.get('email')}`,
+						`ご用件: ${subject}`,
+						'',
+						'お問い合わせ内容:',
+						formData.get('message')
+					].join('\n');
 
-					try {
-						const response = await fetch(contactForm.action, {
-							method: contactForm.method,
-							body: formData,
-							headers: {
-								'Accept': 'application/json'
-							}
-						});
-
-						if (response.ok) {
-							contactFeedback.classList.remove('hidden');
-							contactForm.reset();
-						} else {
-							alert('送信に失敗しました。入力内容をご確認のうえ、再度お試しください。');
-						}
-					} catch (error) {
-						alert('ネットワークエラーが発生しました。接続環境をご確認ください。');
-					} finally {
-						submitBtn.disabled = false;
-						submitBtn.textContent = '送信する';
-					}
+					contactFeedback.classList.remove('hidden');
+					window.location.href =
+						`mailto:shimapj.in.toba@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 				});
 			}
 
